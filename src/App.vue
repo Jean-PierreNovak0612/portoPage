@@ -1,6 +1,7 @@
 <template>
     <div>
         <Header />
+        <router-view></router-view>
     </div>
 </template>
 
@@ -14,3 +15,13 @@ export default {
     },
 }
 </script>
+
+<style>
+    *{
+        box-sizing: border-box;
+    }
+    body {
+        padding: 0;
+        margin: 0;
+    }
+</style>
