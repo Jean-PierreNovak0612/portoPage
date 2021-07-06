@@ -6,8 +6,8 @@
         <nav>
             <ul>
                 <li v-for="link in links" :key="link.name">
-                    <input v-if="link.sublinks" type="checkbox" id="sublink-toggle-{{link.name}}"/>
-                    <label v-if="link.sublinks" for="sublink-toggle-{{link.name}}">{{link.name}} <span>+</span></label>
+                    <input v-if="link.sublinks" type="checkbox" :id='"sublink-toggle-" + link.name'/>
+                    <label v-if="link.sublinks" :for='"sublink-toggle-" + link.name'>{{link.name}} <span>+</span></label>
                     <router-link v-if="link.sublinks" class="link-lg" :to="link.link">{{link.name}}</router-link>
                     <router-link v-else :to="link.link">{{link.name}}</router-link>
                     <ul v-if="link.sublinks">
@@ -36,6 +36,7 @@ export default {
 
 <style scoped>
     @import url('https://fonts.googleapis.com/css2?family=Tourney:wght@900&display=swap');
+
     header { 
         position: fixed;
         top: 0;
@@ -45,6 +46,7 @@ export default {
         margin: 0;
         text-align: center
     }
+
     nav{ 
         position: absolute;
         width: 100%;
@@ -53,47 +55,59 @@ export default {
         color: white;
         text-align: start;
     }
+
     ul {
         list-style: none;
         padding:2px 10px;
     }
+
     li {
         padding: 10px;
         font-weight:bolder;
         font-size: 1.3rem
     }
+
     a{
         text-decoration: none;
         color: #fff;
         font-family: Tourney, monospace;
         letter-spacing: .2rem;
     }
+
     .link-lg{
         display: none;
     }
+
     input {
         display: none;
     }
+
     input ~ ul {
         display: none;
     }
+
     input[type="checkbox"]:checked ~ ul {
         display: block;
+        opacity: 1;
     }
+
     input[type="checkbox"]:checked + label span { 
         transform: rotateZ(675deg) scale(1.7);
     }
+
     label{
         font-family: Tourney, monospace;
         letter-spacing: .2rem;
         user-select: none;
     }
+
     span {
         font-size: 1.4rem;
         display: inline-block;
         transform: scale(1.8) rotateZ(0);
         transition: all .1s
     }
+
     h1 {
         color: #fff;
         font-weight: bolder;
@@ -101,4 +115,5 @@ export default {
         letter-spacing: .2rem;
         user-select: none;
     }
+
 </style>
