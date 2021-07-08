@@ -123,16 +123,25 @@ export default {
         background-color: rgb(75, 97, 97);
         color: white;
         text-align: start;
-        display: none;
+        transform: scale(1, 0);
+        transition: transform 400ms ease-in-out;
+        transform-origin: top;
     }
 
     input[type="checkbox"]:checked ~ nav {
-        display: block;
+        transform: scale(1,1)
     }
-
+    
     ul {
         list-style: none;
         padding:2px 10px;
+        opacity: 0;
+        transition: opacity 200ms ease-in-out;
+    }
+
+    input[type="checkbox"]:checked ~ nav > ul {
+        opacity: 1;
+        transition: opacity 200ms ease-in-out 100;
     }
 
     li {
@@ -210,10 +219,12 @@ export default {
             top: 0;
             width: 70%;
             right: 0;
+            transform: scale(1,1)
         }
 
-        ul {
+        nav ul {
             width: 100%;
+            opacity: 1;
         }
 
         li,
@@ -221,7 +232,26 @@ export default {
             display: inline;
             width: 30%;
             padding: 30px 20px 0;
+            position: relative;
         }
+
+        li::before {
+            content: '';
+            display: block;
+            height: 5px;
+            background-color: #fff;
+            position: absolute;
+            bottom: -.3em;
+            left: 0;
+            right: 0;
+            transform: scale(0,1);
+            transition: transform ease-in-out 250ms
+        }
+
+        li:hover::before {
+            transform: scale(1,1);
+        }
+
         li > ul {
             display: block;
             opacity: 0;
@@ -232,8 +262,8 @@ export default {
             background-color: rgb(75, 97, 97);
             width: 300px;
             z-index: 1;
-            left: 30%;
-            top: 100%;
+            left: 5%;
+            top: 150%;
             transition: top .3s ease-in-out, opacity 600ms ease-in-out;
         }
 
@@ -243,7 +273,7 @@ export default {
         }
 
         li:hover > ul {
-            top: 70%;
+            top: 100%;
             opacity: 1;
             visibility: visible;
         }
