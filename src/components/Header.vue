@@ -3,8 +3,8 @@
         <div class="logo">
             <h1>MyPortoPage</h1>
         </div>
-        <input type="checkbox" id="toggle-navigation" :checked="showNav">
-        <label for="toggle-navigation">
+        <input type="checkbox" id="toggle-navigation" v-model="showNav">
+        <label @click="toggleNav">
             <div></div>
             <div></div>
             <div></div>
@@ -15,10 +15,10 @@
                     <input v-if="link.sublinks" type="checkbox" :id='"sublink-toggle-" + link.name'/>
                     <label v-if="link.sublinks" :for='"sublink-toggle-" + link.name'>{{link.name}} <span>+</span></label>
                     <router-link v-if="link.sublinks" class="link-lg" :to="link.link">{{link.name}}</router-link>
-                    <router-link v-else :to="link.link">{{link.name}}</router-link>
+                    <router-link v-else @click="hideNav" :to="link.link">{{link.name}}</router-link>
                     <ul v-if="link.sublinks">
                         <li v-for="sublink in link.sublinks" :key="sublink.name">
-                            <router-link :to="sublink.link">{{ sublink.name}}</router-link>
+                            <router-link @click="hideNav" :to="sublink.link">{{ sublink.name}}</router-link>
                         </li>
                     </ul>
                 </li>
@@ -39,6 +39,16 @@ export default {
         }
     },
     methods: {
+        toggleNav() {
+            this.showNav = !this.showNav;
+        },
+        hideNav() {
+            this.showNav = false;
+            console.log(this.showNav)
+        },
+        test() {
+            console.log('clicked')
+        }
     },
 }
 </script>
