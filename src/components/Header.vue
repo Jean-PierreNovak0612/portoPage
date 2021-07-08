@@ -1,7 +1,7 @@
 <template>
     <header>
         <div class="logo">
-            <h1>MyPortoPage</h1>
+            <router-link @click="hideNav" to="/"><h1>MyPortoPage</h1></router-link>
         </div>
         <input type="checkbox" id="toggle-navigation" v-model="showNav">
         <label @click="toggleNav">
@@ -190,4 +190,62 @@ export default {
         user-select: none;
     }
 
+    @media(min-width: 1100px) {
+
+        header{
+            text-align: start;
+        }
+
+        h1 {
+            max-width: 60ch;
+            padding: 0 30px;
+        }
+
+        label{
+            display: none;
+        }
+
+        nav{
+            display: block;
+            top: 0;
+            width: 70%;
+            right: 0;
+        }
+
+        ul {
+            width: 100%;
+        }
+
+        li,
+        .link-lg {
+            display: inline;
+            width: 30%;
+            padding: 30px 20px 0;
+        }
+        li > ul {
+            display: block;
+            opacity: 0;
+            border-top: 3px solid #fff;
+            visibility: hidden;
+            padding-bottom: 10px;
+            position: absolute;
+            background-color: rgb(75, 97, 97);
+            width: 300px;
+            z-index: 1;
+            left: 30%;
+            top: 100%;
+            transition: top .3s ease-in-out, opacity 600ms ease-in-out;
+        }
+
+        li > ul li {
+            display: block;
+            width: 100%;
+        }
+
+        li:hover > ul {
+            top: 70%;
+            opacity: 1;
+            visibility: visible;
+        }
+    }
 </style>
