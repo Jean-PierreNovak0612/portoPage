@@ -1,30 +1,34 @@
-export const LINKS = [
+export const LINKS_DEU = [
     {
         name: 'Home',
         link: '/'
     },
     {
-        name: 'Contact',
+        name: 'About me',
+        link: '/about'
+    },
+    {
+        name: 'Kontakt',
         link: '/contact'
     },
     {
-        name: 'Projects',
+        name: 'Projekte',
         link: '/projects',
         sublinks: [
             {
-                name: 'Landing page',
+                name: 'Landingpage',
                 link: '/projects/landing'
             },
             {
-                name: 'E-comerce shop',
+                name: 'eComerce-shop',
                 link: '/projects/e-comerce'
             },
             {
-                name: 'Corona data',
+                name: 'Corona-daten',
                 link: '/projects/corona-data'
             },
             {
-                name: 'YouTube video search',
+                name: 'YouTube-Videosuche',
                 link: '/projects/youtube-api'
             }
         ]

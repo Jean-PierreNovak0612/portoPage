@@ -1,5 +1,6 @@
 <template>
     <header>
+        {{ language() }}
         <div class="logo">
             <router-link @click="hideNav" to="/"><h1>MyPortoPage</h1></router-link>
         </div>
@@ -22,20 +23,33 @@
                         </li>
                     </ul>
                 </li>
+                <li>
+                    <input type="checkbox" id="switch-language" />
+                    <label for="switch-language">{{lang}} <span>+</span></label>
+                    <p>{{lang}}</p>
+                    <ul>
+                        <li @click="changeLang('eng')"><img src="../images/englishFlag.png"> English</li>
+                        <li @click="changeLang('deu')"><img src="../images/germanFlag.png"> Deutsch</li>
+                        <li @click="changeLang('hrv')"><img src="../images/croatianFlag.png"> Hrvatski</li>
+                    </ul>
+                </li>
             </ul>
         </nav>
     </header>
 </template>
 
 <script>
-import { LINKS } from '../data'
+import { LINKS_ENG } from '../data/engdata.js'
+import { LINKS_DEU } from '../data/deudata.js'
+import { LINKS_HR } from '../data/hrvdata.js'
 
 export default {
     name: 'Header',
     data() {
         return { 
-            links: LINKS,
+            links: [],
             showNav: false,
+            lang: ''
         }
     },
     methods: {
@@ -46,8 +60,24 @@ export default {
             this.showNav = false;
             console.log(this.showNav)
         },
-        test() {
-            console.log('clicked')
+        changeLang(lang){
+            this.showNav = false;
+            localStorage.setItem("language",lang)
+            this.language();
+        },
+        language() {
+            if(localStorage.getItem("language") === null || localStorage.getItem("language") === 'eng') {
+                this.links = LINKS_ENG;
+                this.lang = 'Language'
+            }
+            else if( localStorage.getItem("language") === 'deu'){
+                this.links = LINKS_DEU;
+                this.lang = "Sprache"
+            }
+            else {
+                this.links = LINKS_HR;
+                this.lang = "Jezik"
+            }
         }
     },
 }
@@ -64,6 +94,10 @@ export default {
         height: 80px;
         margin: 0;
         text-align: center
+    }
+
+    img {
+        width: 20px;
     }
 
     #toggle-navigation + label {
@@ -147,17 +181,18 @@ export default {
     li {
         padding: 10px;
         font-weight:bolder;
-        font-size: 1.3rem
+        font-size: 1.3rem;
+        cursor: pointer
     }
 
-    a{
+    a, li{
         text-decoration: none;
         color: #fff;
         font-family: Tourney, monospace;
         letter-spacing: .2rem;
     }
 
-    .link-lg{
+    .link-lg, p{
         display: none;
     }
 
@@ -228,11 +263,12 @@ export default {
         }
 
         li,
-        .link-lg {
+        .link-lg,
+        p {
             display: inline;
-            width: 30%;
-            padding: 30px 20px 0;
+            padding: 30px 10px 0;
             position: relative;
+            font-family: Tourney, monospace;
         }
 
         li::before {
